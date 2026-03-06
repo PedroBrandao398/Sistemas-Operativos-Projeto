@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [ "$#" -lt 2 ] || [ "$#" -gt 3 ]; then
+    echo "so_error S1.1 Número inválido de argumentos"
+    exit 1
+fi
+
+material="$1"
+preco="$2"
+limite="$3"
+
+if [ ${#material} -lt 2 ]; then
+    echo "so_error S1.1 Material deve ter pelo menos 2 caracteres"
+    exit 1
+fi
+
+if ! [[ "$preco" =~ ^[0-9]+$ ]] || [ "$preco" -le 0 ]; then
+    echo "so_error S1.1 Preço por kg inválido"
+    exit 1
+fi
+
+if [ -n "$limite" ]; then
+    if ! [[ "$limite" =~ ^[0-9]+$ ]] || [ "$limite" -le 0 ]; then
+        echo "so_error S1.1 Limite diário inválido"
+        exit 1
+    fi
+fi
+
+echo "so_success S1.1"
