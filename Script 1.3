@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ -n "$limite" ]; then
+    nova_linha="$material;$preco;$limite"
+else
+    nova_linha="$material;$preco"
+fi
+
+if echo "$nova_linha" >> "$ficheiro"; then
+    echo "so_success S1.3"
+else
+    echo "so_error S1.3 Erro ao adicionar material"
+    exit 1
+fi
