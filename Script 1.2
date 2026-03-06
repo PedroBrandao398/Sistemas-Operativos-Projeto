@@ -1,0 +1,26 @@
+#!/bin/bash
+
+ficheiro="materiais.txt"
+
+if [ ! -e "$ficheiro" ]; then
+    # Ficheiro não existe → criar novo e avisar
+    echo "so_error S1.2 Ficheiro não existe, criando novo"
+    touch "$ficheiro"
+elif [ ! -r "$ficheiro" ]; then
+    # Ficheiro existe mas não pode ser lido
+    echo "so_error S1.2 Ficheiro não pode ser lido"
+    exit 1
+elif [ ! -w "$ficheiro" ]; then
+    # Ficheiro existe mas não pode ser escrito
+    echo "so_error S1.2 Ficheiro não pode ser escrito"
+    exit 1
+fi
+
+# Procurar material exatamente igual na primeira coluna do ficheiro
+if grep -q "^$material;" "$ficheiro"; then
+    echo "so_success S1.2"
+    # Material já existe → passa a S1.4
+else
+    echo "so_error S1.2 Material não existe, será adicionado"
+    # Material não existe → passa a S1.3
+fi
