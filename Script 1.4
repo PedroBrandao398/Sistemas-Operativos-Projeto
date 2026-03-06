@@ -1,0 +1,18 @@
+#!/bin/bash
+
+ficheiro_origem="materiais.txt"
+ficheiro_destino="materiais-ordenados-preco.txt"
+
+# Verificar se o ficheiro de origem existe e pode ser lido
+if [ ! -r "$ficheiro_origem" ]; then
+    so_error S1.4 "Ficheiro $ficheiro_origem não existe ou não pode ser lido"
+    exit 1
+fi
+
+# Tentar ordenar pelo Preço por kg (segunda coluna) e criar ficheiro destino
+if sort -t';' -k2,2n "$ficheiro_origem" > "$ficheiro_destino"; then
+    so_success S1.4
+else
+    so_error S1.4 "Erro ao criar $ficheiro_destino"
+    exit 1
+fi
